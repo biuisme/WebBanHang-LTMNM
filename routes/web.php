@@ -14,8 +14,13 @@ Route::get('/home', [HomeController::class, 'index']);
 Route::get('/san-pham/{id}', [HomeController::class, 'show'])->name('product.detail');
 Route::get('/danh-muc/{id}', [HomeController::class, 'category'])->name('category.show');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
+
+// Cart routes
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/remove-from-cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+Route::post('/update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+Route::get('/clear-cart', [CartController::class, 'clearCart'])->name('cart.clear');
 
 
 
