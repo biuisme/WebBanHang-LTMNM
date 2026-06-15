@@ -104,5 +104,3 @@ http://localhost/WebBanHang-LTMNM/
 ---
 
 *Dự án được thực hiện bởi nhóm sinh viên cho mục đích học tập.*
-
-```
