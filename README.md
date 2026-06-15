@@ -1,7 +1,7 @@
 
 # Web Bán Hàng - LTMNM 
 
-Dự án website thương mại điện tử được phát triển bằng PHP, thực hiện cho bài tập lớn môn **Lập Trình Mạng Ngôn Ngữ Mở (LTMNM)**.
+Dự án website thương mại điện tử được phát triển bằng PHP, thực hiện cho bài tập lớn môn **Lập Trình Mã Nguồn Mở (LTMNM)**.
 
 ## Công Nghệ Sử Dụng
 
