@@ -1,58 +1,108 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Web Bán Hàng - LTMNM 
 
-## About Laravel
+Dự án website thương mại điện tử được phát triển bằng PHP, thực hiện cho bài tập lớn môn **Lập Trình Mạng Ngôn Ngữ Mở (LTMNM)**.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Công Nghệ Sử Dụng
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* **Backend:** PHP (hỗ trợ chuẩn PSR-4, quản lý thư viện qua Composer)
+* **Frontend:** HTML5, CSS3, JavaScript, Bootstrap (nếu có)
+* **Cơ Sở Dữ Liệu:** MySQL
+* **Môi trường phát triển:** XAMPP, HeidiSQL / phpMyAdmin
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Cấu Trúc Thư Mục 
 
-## Learning Laravel
+Dự án được triển khai theo mô hình **MVC (Model - View - Controller)** giúp tách biệt logic xử lý, truy xuất dữ liệu và giao diện người dùng, thuận tiện cho việc làm việc nhóm.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```text
+WebBanHang-LTMNM/
+│
+├── app/
+│   ├── Controllers/       # Xử lý logic, nhận request từ người dùng và gọi Model/View
+│   ├── Models/            # Xử lý các thao tác với cơ sở dữ liệu (CRUD)
+│   └── Core/              # Chứa các file cấu hình hệ thống (Database connection, Router...)
+│
+├── public/                # Nơi chứa các tài nguyên tĩnh (Client-side)
+│   ├── css/               # File định dạng giao diện
+│   ├── js/                # File script xử lý phía client
+│   └── images/            # Hình ảnh sản phẩm, banner, logo...
+│
+├── views/                 # Chứa các file giao diện người dùng (HTML/PHP)
+│   ├── admin/             # Giao diện trang quản trị
+│   ├── user/              # Giao diện trang khách hàng
+│   └── layouts/           # Các thành phần dùng chung (Header, Footer, Sidebar...)
+│
+├── vendor/                # (Nếu dùng Composer) Chứa các thư viện của bên thứ 3
+├── index.php              # File gốc (Entry point), điều hướng mọi request
+├── .gitignore             # Các file/thư mục không đẩy lên Git (vd: /vendor)
+└── README.md              # Tài liệu hướng dẫn dự án
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+##  Hướng Dẫn Cài Đặt
 
-## Contributing
+Để chạy dự án trên máy cá nhân, vui lòng làm theo các bước sau:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**Bước 1: Clone dự án về máy**
+Mở Terminal/PowerShell ở thư mục `C:\laragon\www` (hoặc `htdocs` của XAMPP) và chạy lệnh:
 
-## Code of Conduct
+```bash
+git clone [https://github.com/biuisme/WebBanHang-LTMNM.git](https://github.com/biuisme/WebBanHang-LTMNM.git)
+cd WebBanHang-LTMNM
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
 
-## Security Vulnerabilities
+**Bước 2: Cài đặt thư viện (Nếu có sử dụng Composer)**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+composer install
 
-## License
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Bước 3: Thiết lập Cơ Sở Dữ Liệu**
+
+1. Khởi động **Apache** và **MySQL** trên XAMPP/Laragon.
+2. Mở trình quản lý cơ sở dữ liệu (HeidiSQL hoặc phpMyAdmin).
+3. Tạo một Database mới (ví dụ: `phukien_web_db`).
+4. Import file SQL (thường nằm trong thư mục `database/` hoặc được đính kèm ở thư mục gốc) vào Database vừa tạo.
+
+**Bước 4: Cấu hình kết nối**
+Mở file cấu hình database (thường là `config.php`, `database.php` hoặc `.env`) và cập nhật thông tin:
+
+```php
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', ''); // Mật khẩu mặc định của XAMPP là rỗng
+define('DB_NAME', 'phukien_web_db');
+
+```
+
+**Bước 5: Chạy ứng dụng**
+Mở trình duyệt web và truy cập vào đường dẫn:
+
+```text
+http://localhost/WebBanHang-LTMNM/
+
+```
+
+## Chức Năng Chính
+
+**User:**
+
+* Đăng ký, đăng nhập và quản lý tài khoản.
+* Duyệt sản phẩm theo danh mục.
+* Tìm kiếm sản phẩm.
+* Thêm vào giỏ hàng và tiến hành đặt hàng.
+
+**Admin:**
+
+* Quản lý danh mục (Thêm, Sửa, Xóa).
+* Quản lý sản phẩm (Cập nhật giá, hình ảnh, tồn kho).
+* Quản lý đơn hàng của khách.
+* Quản lý thông tin người dùng.
+
+---
+
+*Dự án được thực hiện bởi nhóm sinh viên cho mục đích học tập.*
+
+```
