@@ -150,6 +150,12 @@
         Tài khoản
     </a>
 
+    <a href="{{ route('admin.audit-logs.index') }}"
+       class="{{ Request::is('admin/audit-logs*') ? 'active' : '' }}">
+        <i class="bi bi-clock-history"></i>
+        Lịch sử hoạt động
+    </a>
+
     <div style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 20px; padding-top: 10px;"></div>
             
     <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
@@ -171,7 +177,7 @@
     @yield('content')
 
     <div class="text-center text-muted mt-4">
-        © Đồ án quản trị Shop Phụ Kiện
+        Quản trị Shop Phụ Kiện
     </div>
 
 </div>
