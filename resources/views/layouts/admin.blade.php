@@ -132,6 +132,12 @@
         Quản trị dữ liệu
     </div>
 
+    <a href="{{ route('admin.orders.index') }}"
+        class="{{ Request::is('admin/orders*') ? 'active' : '' }}">
+        <i class="bi bi-bag-check"></i>
+        Quản lý đơn hàng
+    </a>
+
     <a href="{{ route('admin.products.index') }}"
        class="{{ Request::is('admin/products*') ? 'active' : '' }}">
         <i class="bi bi-box-seam"></i>

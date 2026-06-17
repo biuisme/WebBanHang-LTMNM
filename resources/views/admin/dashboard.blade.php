@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 @section('title', 'Dashboard')
 @section('content')
+
+{{-- STAT CARDS --}}
 <div class="row">
     <div class="col-md-4 mb-4">
         <div class="card shadow border-0" style="border-left: 5px solid #696cff !important;">
@@ -14,7 +16,7 @@
         <div class="card shadow border-0" style="border-left: 5px solid #03c3ec !important;">
             <div class="card-body">
                 <h5 class="text-muted">Đơn hàng</h5>
-                <h2 class="fw-bold">45</h2>
+                <h2 class="fw-bold">{{ $tongDonHang }}</h2>
             </div>
         </div>
     </div>
@@ -22,35 +24,81 @@
         <div class="card shadow border-0" style="border-left: 5px solid #ffab00 !important;">
             <div class="card-body">
                 <h5 class="text-muted">Doanh thu</h5>
-                <h2 class="fw-bold">18.500.000đ</h2>
+                <h2 class="fw-bold">{{ number_format($doanhThu, 0, ',', '.') }}đ</h2>
             </div>
         </div>
     </div>
 </div>
 
-<div class="card shadow border-0">
-    <div class="card-body">
-        <h5 class="mb-3 fw-bold">Doanh thu theo tháng</h5>
-        <canvas id="revenueChart" height="100"></canvas>
-        <p class="text-muted small mt-3 mb-0">
-            * Dữ liệu mẫu, sẽ cập nhật khi có hệ thống đơn hàng thực tế.
-        </p>
+{{-- PHẦN DƯỚI: BẢNG + BIỂU ĐỒ --}}
+<div class="row">
+    {{-- Bên trái: 10 đơn hàng gần nhất --}}
+    <div class="col-md-6 mb-4">
+        <div class="card shadow border-0 h-100">
+            <div class="card-body">
+                <h5 class="fw-bold mb-3">10 Đơn hàng gần nhất</h5>
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Khách hàng</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Ngày đặt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($donHangGanNhat as $don)
+                            <tr>
+                                <td>{{ $don->id }}</td>
+                                <td>{{ $don->user->name ?? 'N/A' }}</td>
+                                <td>{{ number_format($don->total_amount, 0, ',', '.') }}đ</td>
+                                <td>
+                                    @php
+                                        $badge = match($don->status) {
+                                            'completed'  => 'success',
+                                            'pending'    => 'warning',
+                                            'shipping'   => 'info',
+                                            'confirmed'  => 'primary',
+                                            'cancelled'  => 'danger',
+                                            default      => 'secondary',
+                                        };
+                                    @endphp
+                                    <span class="badge bg-{{ $badge }}">{{ $don->status }}</span>
+                                </td>
+                                <td>{{ \Carbon\Carbon::parse($don->created_at)->format('d/m/Y') }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Bên phải: Biểu đồ doanh thu --}}
+    <div class="col-md-6 mb-4">
+        <div class="card shadow border-0 h-100">
+            <div class="card-body">
+                <h5 class="fw-bold mb-3">Doanh thu theo tháng ({{ now()->year }})</h5>
+                <canvas id="revenueChart" height="200"></canvas>
+            </div>
+        </div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script>
-    const ctx = document.getElementById('revenueChart');
+    const revenueData = @json($revenueData);
 
-    new Chart(ctx, {
+    new Chart(document.getElementById('revenueChart'), {
         type: 'line',
         data: {
-            labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
-                     'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+            labels: ['T1','T2','T3','T4','T5','T6','T7','T8','T9','T10','T11','T12'],
             datasets: [{
                 label: 'Doanh thu (VNĐ)',
-                data: [12000000, 15500000, 9800000, 17200000, 14000000, 18500000,
-                       21000000, 19500000, 16800000, 23000000, 20500000, 25000000],
+                data: revenueData,
                 borderColor: '#696cff',
                 backgroundColor: 'rgba(105,108,255,0.1)',
                 fill: true,
@@ -65,18 +113,14 @@
                 legend: { display: false },
                 tooltip: {
                     callbacks: {
-                        label: function(context) {
-                            return context.parsed.y.toLocaleString('vi-VN') + 'đ';
-                        }
+                        label: ctx => ctx.parsed.y.toLocaleString('vi-VN') + 'đ'
                     }
                 }
             },
             scales: {
                 y: {
                     ticks: {
-                        callback: function(value) {
-                            return (value / 1000000) + 'tr';
-                        }
+                        callback: val => (val / 1000000) + 'tr'
                     }
                 }
             }

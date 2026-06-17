@@ -21,12 +21,7 @@
 
 <div class="container">
 
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show mt-3 shadow-sm" role="alert">
-            <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
+
 
     <h2 class="text-center mb-4 mt-3">
         @if(isset($category))

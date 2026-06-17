@@ -4,19 +4,7 @@
 <div class="container mt-4">
     <h2 class="mb-4">🛒 Giỏ hàng của bạn</h2>
 
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>✓ Thành công!</strong> {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
 
-    @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>✗ Lỗi!</strong> {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
 
     @if(session('cart') && count(session('cart')) > 0)
         <form action="{{ route('cart.update') }}" method="POST">
@@ -88,34 +76,13 @@
                         <a href="{{ route('cart.clear') }}" class="btn btn-outline-danger" onclick="return confirm('Bạn có chắc muốn xóa toàn bộ giỏ hàng?')">
                             <i class="bi bi-trash"></i> Xóa tất cả
                         </a>
-                        <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#checkoutModal">
+                        <a href="{{ route('checkout.index') }}" class="btn btn-success btn-lg">
                             <i class="bi bi-credit-card"></i> Tiến hành thanh toán ({{ number_format($total) }} đ)
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
         </form>
-
-        <!-- Modal Thanh toán -->
-        <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-success text-white">
-                        <h5 class="modal-title" id="checkoutModalLabel">Thông tin thanh toán</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p><strong>Tổng tiền:</strong> <span class="text-danger">{{ number_format($total) }} đ</span></p>
-                        <p><strong>Số lượng sản phẩm:</strong> {{ count(session('cart')) }}</p>
-                        <hr>
-                        <p class="text-muted">💡 Tính năng thanh toán sẽ được kích hoạt sớm. Vui lòng quay lại sau!</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     @else
         <div class="alert alert-info text-center py-5">
             <i class="bi bi-bag" style="font-size: 3rem;"></i>

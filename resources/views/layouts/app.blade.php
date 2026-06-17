@@ -155,6 +155,14 @@
 
                                     <li>
                                         <a class="dropdown-item"
+                                           href="{{ route('orders.index') }}">
+                                            <i class="bi bi-box-seam me-2"></i>
+                                            Đơn hàng của tôi
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item"
                                            href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                            document.getElementById('logout-form').submit();">
